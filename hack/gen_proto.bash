@@ -2,17 +2,14 @@
 set -eo pipefail
 
 cd $(git rev-parse --show-toplevel)
-if [ ! -d ../pbobject ]; then
-    echo "Clone pbobject to ../"
-    echo "git clone git@github.com:aperturerobotics/pbobject.git $(pwd)/../pbobject"
+export PATH=$PATH:$(pwd)/node_modules/.bin
+
+GEN_PROTO=../../hack/lib/gen_proto.bash
+if [ ! -f $GEN_PROTO ]; then
+    echo "Please run this script in the js monorepo."
     exit 1
 fi
 
-finalize() {
-    pbts -o ./src/pb/${1}.d.ts ./src/pb/${1}.js
-    sed -i '1s;^;/* tslint:disable */\n;' ./src/pb/${1}.d.ts
-}
+source $GEN_PROTO
 
-export PATH=$PATH:$(pwd)/node_modules/.bin
-pbjs -t static-module -w commonjs -o ./src/pb/pbobject.js ../pbobject/pbobject.proto ./node_modules/@aperturerobotics/timestamp/timestamp.proto
-finalize pbobject
+compile_proto
