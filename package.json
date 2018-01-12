@@ -1,5 +1,5 @@
 {
-  "name": "@aperturerobotics/pbobject-js",
+  "name": "@aperturerobotics/pbobject",
   "private": true,
   "version": "0.0.0",
   "description": "Object encoding and encryption.",
@@ -82,7 +82,7 @@
     "cross-env": "^5.0.1",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.14.0",
-    "jest": "^22.0.2",
+    "jest": "^22.0.0",
     "lint-staged": "^6.0.0",
     "lodash.camelcase": "^4.3.0",
     "prettier": "^1.4.4",
@@ -105,8 +105,8 @@
     "validate-commit-msg": "^2.12.2"
   },
   "dependencies": {
-      "protobufjs": "^6.8.4",
-      "@aperturerobotics/objectenc": "~0.0.1",
-    "@aperturerobotics/timestamp": "~0.0.1"
+    "@aperturerobotics/objectenc": "^0.0.0",
+    "@aperturerobotics/timestamp": "^0.0.0",
+    "protobufjs": "^6.8.0"
   }
 }
