@@ -1,7 +1,7 @@
 {
   "name": "@aperturerobotics/pbobject",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Object encoding and encryption.",
   "main": "dist/pbobject-js.umd.js",
   "module": "dist/pbobject-js.es5.js",
@@ -105,7 +105,7 @@
     "validate-commit-msg": "^2.12.2"
   },
   "dependencies": {
-    "@aperturerobotics/objectenc": "^0.0.0",
+    "@aperturerobotics/objectenc": "^0.1.0",
     "@aperturerobotics/timestamp": "^0.0.0",
     "protobufjs": "^6.8.0"
   }
