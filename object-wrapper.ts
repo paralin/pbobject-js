@@ -1,7 +1,6 @@
 import { IObject } from './object'
 import { IEncryptionConfig } from './enc-conf'
 import { pbobject } from './pb'
-import { timestamp } from '@aperturerobotics/timestamp'
 import { newSignature, Signature } from '@aperturerobotics/objectsig'
 import { Encrypt, objectenc } from '@aperturerobotics/objectenc'
 import { getTypeIdCrc32 } from './type-id'
