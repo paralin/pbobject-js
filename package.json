@@ -1,7 +1,7 @@
 {
   "name": "@aperturerobotics/pbobject",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Object encoding and encryption.",
   "main": "dist/pbobject-js.umd.js",
   "module": "dist/pbobject-js.es5.js",
@@ -55,7 +55,7 @@
       "js"
     ],
     "collectCoverageFrom": [
-        "*.{ts,tsx}"
+      "*.{ts,tsx}"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
@@ -101,8 +101,8 @@
     "validate-commit-msg": "^2.12.2"
   },
   "dependencies": {
-    "@aperturerobotics/objectenc": "^0.1.0",
-    "@aperturerobotics/timestamp": "^0.0.0",
+    "@aperturerobotics/objectenc": "^0.2.0",
+    "@aperturerobotics/timestamp": "^0.2.0",
     "crc-32": "^1.1.1",
     "elliptic": "^6.4.0",
     "protobufjs": "^6.8.0"
