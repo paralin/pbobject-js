@@ -13,3 +13,8 @@ fi
 source $GEN_PROTO
 
 compile_proto
+
+pbjs -t static-module -w commonjs \
+     -o ./test/mock-object.js \
+     ./test/mock-object.proto
+pbts -o ./test/mock-object.d.ts ./test/mock-object.js

@@ -1,0 +1,6 @@
+syntax = "proto3";
+package mock;
+
+message MockObject {
+  string test_field = 1;
+}

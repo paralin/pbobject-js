@@ -11,6 +11,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declarationDir": "dist/types",
+    "types": ["long"],
     "outDir": "dist/es",
     "typeRoots": [
       "node_modules/@types"

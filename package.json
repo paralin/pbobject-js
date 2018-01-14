@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
+    "build": "tsc --module commonjs --outDir dist/lib && ./hack/copy_pb.bash && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -60,7 +60,8 @@
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/test/"
+      "/test/",
+      "/src/pb/"
     ],
     "coverageThreshold": {
       "global": {
@@ -75,6 +76,7 @@
   },
   "devDependencies": {
     "@types/jest": "^22.0.0",
+    "@types/long": "^3.0.32",
     "@types/node": "^8.0.0",
     "colors": "^1.1.2",
     "commitizen": "^2.9.6",
@@ -107,6 +109,8 @@
   "dependencies": {
     "@aperturerobotics/objectenc": "^0.1.0",
     "@aperturerobotics/timestamp": "^0.0.0",
+    "crc-32": "^1.1.1",
+    "elliptic": "^6.4.0",
     "protobufjs": "^6.8.0"
   }
 }

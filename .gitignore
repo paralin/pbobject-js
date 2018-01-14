@@ -9,3 +9,5 @@ dist
 compiled
 .awcache
 prototree
+.#*
+.*_cache
