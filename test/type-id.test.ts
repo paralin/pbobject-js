@@ -1,5 +1,7 @@
-import { pbobject } from '../src/pb'
-import { getTypeIdCrc32 } from '../src/type-id'
+import {
+    pbobject,
+    getTypeIdCrc32,
+} from '../index'
 
 describe('ObjectTypeID', () => {
     it('returns correct type crc32', () => {

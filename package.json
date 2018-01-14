@@ -21,16 +21,12 @@
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs --outDir dist/lib && ./hack/copy_pb.bash && rollup -c rollup.config.ts && typedoc --out dist/docs --target es6 --theme minimal --mode file src",
-    "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
     "deploy-docs": "ts-node tools/gh-pages-publish",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -52,16 +48,20 @@
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testRegex": "(.*)(test|spec)\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
       "js"
     ],
+    "collectCoverageFrom": [
+        "*.{ts,tsx}"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/test/",
-      "/src/pb/"
+      "/pb/",
+      "index.ts"
     ],
     "coverageThreshold": {
       "global": {
@@ -91,12 +91,6 @@
     "prompt": "^1.0.0",
     "replace-in-file": "^3.0.0-beta.2",
     "rimraf": "^2.6.1",
-    "rollup": "^0.53.0",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.9.0",
-    "semantic-release": "^11.0.2",
     "ts-jest": "^22.0.0",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",

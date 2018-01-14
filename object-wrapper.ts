@@ -21,7 +21,7 @@ export async function newObjectWrapper(obj: IObject, encConf: IEncryptionConfig,
         signatures.push(await newSignature(signerKey, data))
     }
 
-    let encType = encConf.encryptionType || objectenc.EncryptionType.EncryptionType_AES
+    let encType = encConf.encryptionType || objectenc.EncryptionType.EncryptionType_UNENCRYPTED
     let encBlob = await Encrypt(encType, data, encConf.resourceLookup)
     return new ObjectWrapper({
         timestamp: { timeUnixMs: Math.floor(ts.valueOf()) },

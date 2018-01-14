@@ -1,6 +1,6 @@
-import { pbobject } from '../src/pb'
-import { newObjectWrapper, ObjectWrapper } from '../src/object-wrapper'
-import { IObject } from '../src/object'
+import { pbobject } from '../pb'
+import { newObjectWrapper, ObjectWrapper } from '../object-wrapper'
+import { IObject } from '../object'
 import { mock } from './mock-object'
 
 import * as $protobuf from 'protobufjs'
