@@ -25,7 +25,6 @@ $root.pbobject = (function() {
          * @memberof pbobject
          * @interface IObjectWrapper
          * @property {number|null} [objectTypeCrc] ObjectWrapper objectTypeCrc
-         * @property {timestamp.ITimestamp|null} [timestamp] ObjectWrapper timestamp
          * @property {objectenc.IEncryptedBlob|null} [encBlob] ObjectWrapper encBlob
          * @property {Array.<objectsig.ISignature>|null} [signatures] ObjectWrapper signatures
          */
@@ -53,14 +52,6 @@ $root.pbobject = (function() {
          * @instance
          */
         ObjectWrapper.prototype.objectTypeCrc = 0;
-
-        /**
-         * ObjectWrapper timestamp.
-         * @member {timestamp.ITimestamp|null|undefined} timestamp
-         * @memberof pbobject.ObjectWrapper
-         * @instance
-         */
-        ObjectWrapper.prototype.timestamp = null;
 
         /**
          * ObjectWrapper encBlob.
@@ -104,8 +95,6 @@ $root.pbobject = (function() {
                 writer = $Writer.create();
             if (message.objectTypeCrc != null && message.hasOwnProperty("objectTypeCrc"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.objectTypeCrc);
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                $root.timestamp.Timestamp.encode(message.timestamp, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.encBlob != null && message.hasOwnProperty("encBlob"))
                 $root.objectenc.EncryptedBlob.encode(message.encBlob, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.signatures != null && message.signatures.length)
@@ -147,9 +136,6 @@ $root.pbobject = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.objectTypeCrc = reader.uint32();
-                    break;
-                case 2:
-                    message.timestamp = $root.timestamp.Timestamp.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.encBlob = $root.objectenc.EncryptedBlob.decode(reader, reader.uint32());
@@ -197,11 +183,6 @@ $root.pbobject = (function() {
             if (message.objectTypeCrc != null && message.hasOwnProperty("objectTypeCrc"))
                 if (!$util.isInteger(message.objectTypeCrc))
                     return "objectTypeCrc: integer expected";
-            if (message.timestamp != null && message.hasOwnProperty("timestamp")) {
-                var error = $root.timestamp.Timestamp.verify(message.timestamp);
-                if (error)
-                    return "timestamp." + error;
-            }
             if (message.encBlob != null && message.hasOwnProperty("encBlob")) {
                 var error = $root.objectenc.EncryptedBlob.verify(message.encBlob);
                 if (error)
@@ -233,11 +214,6 @@ $root.pbobject = (function() {
             var message = new $root.pbobject.ObjectWrapper();
             if (object.objectTypeCrc != null)
                 message.objectTypeCrc = object.objectTypeCrc >>> 0;
-            if (object.timestamp != null) {
-                if (typeof object.timestamp !== "object")
-                    throw TypeError(".pbobject.ObjectWrapper.timestamp: object expected");
-                message.timestamp = $root.timestamp.Timestamp.fromObject(object.timestamp);
-            }
             if (object.encBlob != null) {
                 if (typeof object.encBlob !== "object")
                     throw TypeError(".pbobject.ObjectWrapper.encBlob: object expected");
@@ -273,13 +249,10 @@ $root.pbobject = (function() {
                 object.signatures = [];
             if (options.defaults) {
                 object.objectTypeCrc = 0;
-                object.timestamp = null;
                 object.encBlob = null;
             }
             if (message.objectTypeCrc != null && message.hasOwnProperty("objectTypeCrc"))
                 object.objectTypeCrc = message.objectTypeCrc;
-            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
-                object.timestamp = $root.timestamp.Timestamp.toObject(message.timestamp, options);
             if (message.encBlob != null && message.hasOwnProperty("encBlob"))
                 object.encBlob = $root.objectenc.EncryptedBlob.toObject(message.encBlob, options);
             if (message.signatures && message.signatures.length) {
