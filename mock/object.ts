@@ -1,7 +1,6 @@
 import { pbobject } from '../pb'
-import { newObjectWrapper, ObjectWrapper } from '../object-wrapper'
 import { IObject } from '../object'
-import { mock } from '../mock/mock-object'
+import { mock } from './mock-object'
 
 import * as $protobuf from 'protobufjs'
 
@@ -36,9 +35,3 @@ class MockObject extends mock.MockObject implements IObject {
         return new MockObject(mock.MockObject.decode(reader, length))
     }
 }
-
-describe('ObjectWrapper', () => {
-    it('should build wrapper correctly', async () => {
-        let wrapper = await newObjectWrapper(new MockObject(), {})
-    })
-})

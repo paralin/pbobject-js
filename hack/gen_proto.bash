@@ -15,6 +15,6 @@ source $GEN_PROTO
 compile_proto
 
 pbjs -t static-module -w commonjs \
-     -o ./test/mock-object.js \
-     ./test/mock-object.proto
-pbts -o ./test/mock-object.d.ts ./test/mock-object.js
+     -o ./mock/mock-object.js \
+     ./mock/mock-object.proto
+pbts -o ./mock/mock-object.d.ts ./mock/mock-object.js
