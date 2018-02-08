@@ -36,7 +36,8 @@ export async function newObjectWrapper(obj: IObject, encConf: IEncryptionConfig,
     }
 
     let encType = encConf.encryptionType || objectenc.EncryptionType.EncryptionType_UNENCRYPTED
-    let encBlob = await Encrypt(encType, data, encConf.resourceLookup)
+    let cmpType = encConf.compressionType || objectenc.CompressionType.CompressionType_UNCOMPRESSED
+    let encBlob = await Encrypt(encType, cmpType, data, encConf.resourceLookup)
     return new ObjectWrapper({
         timestamp: { timeUnixMs: Math.floor(ts.valueOf()) },
         objectTypeCrc: getTypeIdCrc32(obj.getObjectTypeId()),
