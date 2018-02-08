@@ -7,6 +7,7 @@ import { getTypeIdCrc32 } from './type-id'
 
 // ObjectWrapper wraps an object with type information and signatures.
 export class ObjectWrapper extends pbobject.ObjectWrapper {
+    // decodeToObject decodes the object wrapper to an object.
     public async decodeToObject(obj: IObject, encConf: IEncryptionConfig): Promise<IObject> {
         if (!this.encBlob) {
             throw new Error(`encrypted blob is empty`)
@@ -19,6 +20,30 @@ export class ObjectWrapper extends pbobject.ObjectWrapper {
 
         let encBlob = objectenc.EncryptedBlob.create(this.encBlob)
         let objData = await Decrypt(encBlob, encConf.resourceLookup)
+
+        let verifyKeys: any[] = encConf.verifyKeys || []
+        for (let publicKey of verifyKeys) {
+            if (!publicKey.verify) {
+                throw new Error('given verify key is not a valid public key')
+            }
+
+            let foundSig = false
+            for (let sigMsg of this.signatures) {
+                let sig = new Signature(sigMsg)
+                if (!sig.matchesPublicKey(publicKey)) {
+                    continue
+                }
+
+                foundSig = true
+                await sig.verify(publicKey, objData)
+                break
+            }
+
+            if (!foundSig) {
+                throw new Error('message not signed by required key')
+            }
+        }
+
         return obj.decode(objData)
     }
 }

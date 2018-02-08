@@ -4,7 +4,7 @@ import { mock } from './mock-object'
 
 import * as $protobuf from 'protobufjs'
 
-class MockObject extends mock.MockObject implements IObject {
+export class MockObject extends mock.MockObject implements IObject {
     /* Returns the object type ID.
      * @param message Protobuf object to encode
      * @param [writer] Writer to encode to

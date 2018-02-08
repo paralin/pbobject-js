@@ -14,4 +14,6 @@ export interface IEncryptionConfig {
     hashCode?: number
     // signerKeys are the keys to sign the buffer with when making an object wrapper.
     signerKeys?: any[]
+    // verifyKeys are the public keys to verify the object against.
+    verifyKeys?: any[]
 }
