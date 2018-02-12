@@ -39,6 +39,8 @@ class MockObject extends mock.MockObject implements IObject {
 
 describe('ObjectWrapper', () => {
     it('should build wrapper correctly', async () => {
-        let wrapper = await newObjectWrapper(new MockObject(), {})
+        let res = await newObjectWrapper(new MockObject(), {})
+        let wrapper = res.wrapper
+        expect(wrapper).not.toBeFalsy()
     })
 })

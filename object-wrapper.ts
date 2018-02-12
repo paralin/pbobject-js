@@ -48,9 +48,15 @@ export class ObjectWrapper extends pbobject.ObjectWrapper {
     }
 }
 
+interface INewObjectWrapperResult {
+    // Data is the encoded object.
+    data: Uint8Array
+    // Wrapper is the object wrapper.
+    wrapper: ObjectWrapper
+}
+
 // newObjectWrapper builds a new object wrapper.
-export async function newObjectWrapper(obj: IObject, encConf: IEncryptionConfig, ts?: Date): Promise<ObjectWrapper> {
-    ts = ts || new Date()
+export async function newObjectWrapper(obj: IObject, encConf: IEncryptionConfig): Promise<INewObjectWrapperResult> {
     let data = obj.encode(obj).finish()
 
     // Build any signatures
@@ -63,10 +69,12 @@ export async function newObjectWrapper(obj: IObject, encConf: IEncryptionConfig,
     let encType = encConf.encryptionType || objectenc.EncryptionType.EncryptionType_UNENCRYPTED
     let cmpType = encConf.compressionType || objectenc.CompressionType.CompressionType_UNCOMPRESSED
     let encBlob = await Encrypt(encType, cmpType, data, encConf.resourceLookup)
-    return new ObjectWrapper({
-        timestamp: { timeUnixMs: Math.floor(ts.valueOf()) },
-        objectTypeCrc: getTypeIdCrc32(obj.getObjectTypeId()),
-        encBlob,
-        signatures,
-    })
+    return {
+        data,
+        wrapper: new ObjectWrapper({
+            objectTypeCrc: getTypeIdCrc32(obj.getObjectTypeId()),
+            encBlob,
+            signatures,
+        }),
+    }
 }
