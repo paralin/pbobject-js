@@ -3,9 +3,8 @@
   "private": true,
   "version": "0.2.0",
   "description": "Object encoding and encryption.",
-  "main": "dist/pbobject-js.umd.js",
-  "module": "dist/pbobject-js.es5.js",
-  "typings": "dist/types/pbobject-js.d.ts",
+  "main": "dist/es/index.js",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
@@ -14,7 +13,7 @@
     "type": "git",
     "url": "git@github.com:aperturerobotics/pbobject-js.git"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=6.0.0"
   },

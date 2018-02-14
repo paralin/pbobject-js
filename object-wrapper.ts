@@ -48,7 +48,8 @@ export class ObjectWrapper extends pbobject.ObjectWrapper {
     }
 }
 
-interface INewObjectWrapperResult {
+// INewObjectWrapperResult is returned when an object wrapper is built.
+export interface INewObjectWrapperResult {
     // Data is the encoded object.
     data: Uint8Array
     // Wrapper is the object wrapper.
