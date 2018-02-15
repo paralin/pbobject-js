@@ -1,109 +1,108 @@
 {
-  "name": "@aperturerobotics/pbobject",
-  "private": true,
-  "version": "0.2.0",
-  "description": "Object encoding and encryption.",
-  "main": "dist/es/index.js",
-  "typings": "dist/types/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "author": "Christian Stewart <christian@paral.in>",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:aperturerobotics/pbobject-js.git"
-  },
-  "license": "UNLICENSED",
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "scripts": {
-    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "prebuild": "rimraf dist",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
-    "deploy-docs": "ts-node tools/gh-pages-publish",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "prettier --write --no-semi --single-quote",
-      "git add"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
+    "name": "@aperturerobotics/pbobject",
+    "private": true,
+    "version": "0.2.0",
+    "description": "Object encoding and encryption.",
+    "main": "dist/es/index.js",
+    "typings": "dist/types/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "author": "Christian Stewart <christian@paral.in>",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:aperturerobotics/pbobject-js.git"
     },
-    "validate-commit-msg": {
-      "types": "conventional-commit-types",
-      "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+    "license": "UNLICENSED",
+    "engines": {
+        "node": ">=6.0.0"
+    },
+    "scripts": {
+        "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+        "build": "tsc && ./hack/copy_pb.bash",
+        "prebuild": "rimraf dist",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+        "deploy-docs": "ts-node tools/gh-pages-publish",
+        "report-coverage": "cat ./coverage/lcov.info | coveralls",
+        "commit": "git-cz",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "{src,test}/**/*.ts": [
+            "prettier --write --no-semi --single-quote",
+            "git add"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-conventional-changelog"
+        },
+        "validate-commit-msg": {
+            "types": "conventional-commit-types",
+            "helpMessage": "Use \"npm run commit\" instead, we use conventional-changelog format :) (https://github.com/commitizen/cz-cli)"
+        }
+    },
+    "jest": {
+        "transform": {
+            ".(ts|tsx)": "../../node_modules/ts-jest/preprocessor.js"
+        },
+        "testRegex": "(.*)(test|spec)\\.(ts|tsx|js)$",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "collectCoverageFrom": [
+            "*.{ts,tsx}"
+        ],
+        "coveragePathIgnorePatterns": [
+            "/node_modules/",
+            "/test/",
+            "/pb/",
+            "/dist/"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 90,
+                "functions": 95,
+                "lines": 95,
+                "statements": 95
+            }
+        },
+        "collectCoverage": true,
+        "mapCoverage": true
+    },
+    "devDependencies": {
+        "@types/jest": "^22.1.0",
+        "@types/long": "^3.0.32",
+        "@types/node": "^9.4.5",
+        "colors": "^1.1.2",
+        "commitizen": "^2.9.6",
+        "coveralls": "^3.0.0",
+        "cross-env": "^5.0.1",
+        "cz-conventional-changelog": "^2.0.0",
+        "husky": "^0.14.0",
+        "lint-staged": "^6.0.0",
+        "prettier": "^1.4.4",
+        "prompt": "^1.0.0",
+        "replace-in-file": "^3.0.0-beta.2",
+        "rimraf": "^2.6.1",
+        "ts-jest": "^22.0.0",
+        "ts-node": "^4.1.0",
+        "tslint": "^5.8.0",
+        "tslint-config-prettier": "^1.1.0",
+        "tslint-config-standard": "^7.0.0",
+        "typedoc": "^0.10.0",
+        "typescript": "^2.6.2",
+        "validate-commit-msg": "^2.12.2"
+    },
+    "dependencies": {
+        "@aperturerobotics/objectenc": "^0.2.0",
+        "@aperturerobotics/timestamp": "^0.2.0",
+        "crc-32": "^1.1.1",
+        "elliptic": "^6.4.0",
+        "protobufjs": "^6.8.0"
     }
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "../../node_modules/ts-jest/preprocessor.js"
-    },
-    "transformIgnorePatterns": [
-        "(!@aperturerobotics)"
-    ],
-    "testRegex": "(.*)(test|spec)\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "collectCoverageFrom": [
-      "*.{ts,tsx}"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test/",
-      "/pb/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
-    },
-    "collectCoverage": true,
-    "mapCoverage": true
-  },
-  "devDependencies": {
-    "@types/jest": "^22.1.0",
-    "@types/long": "^3.0.32",
-    "@types/node": "^9.4.5",
-    "colors": "^1.1.2",
-    "commitizen": "^2.9.6",
-    "coveralls": "^3.0.0",
-    "cross-env": "^5.0.1",
-    "cz-conventional-changelog": "^2.0.0",
-    "husky": "^0.14.0",
-    "lint-staged": "^6.0.0",
-    "prettier": "^1.4.4",
-    "prompt": "^1.0.0",
-    "replace-in-file": "^3.0.0-beta.2",
-    "rimraf": "^2.6.1",
-    "ts-jest": "^22.0.0",
-    "ts-node": "^4.1.0",
-    "tslint": "^5.8.0",
-    "tslint-config-prettier": "^1.1.0",
-    "tslint-config-standard": "^7.0.0",
-    "typedoc": "^0.10.0",
-    "typescript": "^2.6.2",
-    "validate-commit-msg": "^2.12.2"
-  },
-  "dependencies": {
-    "@aperturerobotics/objectenc": "^0.2.0",
-    "@aperturerobotics/timestamp": "^0.2.0",
-    "crc-32": "^1.1.1",
-    "elliptic": "^6.4.0",
-    "protobufjs": "^6.8.0"
-  }
 }

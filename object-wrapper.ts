@@ -1,7 +1,7 @@
 import { IObject } from './object'
 import { IEncryptionConfig } from './enc-conf'
 import { pbobject } from './pb'
-import { newSignature, Signature } from '@aperturerobotics/objectsig'
+import { newSignature, Signature, objectsig } from '@aperturerobotics/objectsig'
 import { Encrypt, Decrypt, objectenc } from '@aperturerobotics/objectenc'
 import { getTypeIdCrc32 } from './type-id'
 
@@ -62,7 +62,7 @@ export async function newObjectWrapper(obj: IObject, encConf: IEncryptionConfig)
 
     // Build any signatures
     let signerKeys = encConf.signerKeys || []
-    let signatures: Signature[] = []
+    let signatures: objectsig.ISignature[] = []
     for (let signerKey of signerKeys) {
         signatures.push(await newSignature(signerKey, data))
     }
